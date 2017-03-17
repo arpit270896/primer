@@ -21,10 +21,12 @@
 		<img id="CaptureImage" src="" style="margin-left: 20px;" width="480" height="360">
 		<canvas id="tmpImage" style="margin-left: 20px; display: none;" width="480" height="360"></canvas>
 	</div>
+	
 
 </body>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="jquery.ui.js"></script>
-<script type="text/javascript" src="script.js"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.ui.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </html>
 
