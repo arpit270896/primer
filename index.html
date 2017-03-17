@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div style="margin-left: 100px; float:left">
+		<div>
+			<video id="sourcevid" autoplay width="480" height="360" onloadedmetadata="ResizeCanvas();">
+				Sorry, you're browser doesn't support video. Please try 
+				<a href="http://snapshot.opera.com/labs/camera/">Opera</a>.
+			</video>
+		</div>
+		<div style="margin-left: 170px;">
+			<input type="button" value="Start" onclick="start()" class="button" >
+			<input type="button" value="Stop" onclick="stop()" class="button" >
+			<input type="button" value="Capture" onclick="snapshot()" class="button" >
+		</div>
+	</div>
+	<div style="margin-left: 100px;">
+		<img id="CaptureImage" src="" style="margin-left: 20px;" width="480" height="360">
+		<canvas id="tmpImage" style="margin-left: 20px; display: none;" width="480" height="360"></canvas>
+	</div>
+
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.ui.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</html>
+
