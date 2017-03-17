@@ -9,8 +9,21 @@ function snapshot() {
 				var img = document.getElementById('CaptureImage');
 				// "image/webp" works in Chrome 18. In other browsers, this will fall back to image/png.
 				img.src = canvas.toDataURL('image/jpg');
+
+				data = {
+					'image_data': img.src
+				}
+
+				$.ajax({
+					type: 'POST',
+					url: "/convert",
+					data: data,
+					success: function(resultData) {
+						console.log(resultData)
+					}
+				});
 		}
-}    
+}
 
 function hasGetUserMedia() {
 		// Note: Opera builds are unprefixed.
