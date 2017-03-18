@@ -36,15 +36,18 @@ def get_image():
 def mail():
 	mail_id = request.form['email']
 	rand_string = request.form['hash']
-	
+
 	msg = MIMEMultipart()
-	msg.attach(MIMEText('Hello from Mailgun'))
-	msg['Subject'] = "Hello from SDSLabs"
+	msg.attach(MIMEText('Greetings from SDSLabs!\n Welcome to Srishti 2017. Thanks for checking out Primer-"Convex optimization based gif generator". We hope you have best expeience during Srishti at SDSLabs. \nYou will find your image and GIF generated attached here.\n\n Cheers!'))
+	msg['Subject'] = "Welcome to Srishti'17 at SDSLabs"
 	msg['From']    = "convop@srishti.sdslabs.co"
 	msg['To']      = mail_id
 
 	part = MIMEApplication(open("static/gifs/{}.gif".format(rand_string), 'rb').read(),Name=rand_string+".gif")
 	part['Content-Disposition'] = "attachment; filename={}.gif".format(rand_string)
+	msg.attach(part)
+	part = MIMEApplication(open("static/photos/{}.jpg".format(rand_string), 'rb').read(),Name=rand_string+".gif")
+	part['Content-Disposition'] = "attachment; filename={}.jpg".format(rand_string)
 	msg.attach(part)
 	s = smtplib.SMTP('smtp.mailgun.org', 587)
 
