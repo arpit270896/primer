@@ -73,5 +73,8 @@ def show():
 	return render_template("show.html", hash=rand_string)
 
 
+
+
 if __name__ == "__main__":
-	app.run(debug=True)
+	context = ('cert.pem', 'key.pem')
+	app.run(host='0.0.0.0', port=80, ssl_context=context, debug=True)
