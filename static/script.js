@@ -53,7 +53,7 @@ function start() {
 		
 		//var gumOptions = { video: true, toString: function () { return 'video'; } };    
 		if (navigator.getUserMedia) {
-			navigator.getUserMedia({ video: true, audio: true }, function (stream) {
+			navigator.getUserMedia({ video: true }, function (stream) {
 				if (navigator.webkitGetUserMedia) {
 					video.src = window.webkitURL.createObjectURL(stream);
 				} else {
