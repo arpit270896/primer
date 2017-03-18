@@ -36,7 +36,7 @@ def get_image():
 def mail():
 	mail_id = request.form['email']
 	rand_string = request.form['hash']
-	
+
 	msg = MIMEMultipart()
 	msg.attach(MIMEText('Hello from Mailgun'))
 	msg['Subject'] = "Hello from SDSLabs"
@@ -45,6 +45,9 @@ def mail():
 
 	part = MIMEApplication(open("static/gifs/{}.gif".format(rand_string), 'rb').read(),Name=rand_string+".gif")
 	part['Content-Disposition'] = "attachment; filename={}.gif".format(rand_string)
+	msg.attach(part)
+	part = MIMEApplication(open("static/photos/{}.jpg".format(rand_string), 'rb').read(),Name=rand_string+".gif")
+	part['Content-Disposition'] = "attachment; filename={}.jpg".format(rand_string)
 	msg.attach(part)
 	s = smtplib.SMTP('smtp.mailgun.org', 587)
 
