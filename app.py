@@ -27,7 +27,10 @@ def get_image():
 	with open("static/photos/{}.jpg".format(rand_string), 'wb') as f:
 		f.write(b64decode(img_base64))
 
-	os.system("primitive -i static/photos/{0}.jpg -o /tmp/{0}.gif -n 100 -m 6 && mv /tmp/{0}.gif static/gifs/{0}.gif".format(rand_string))
+	os.system("""convert static/photos/{0}.jpg -resize 256x256 static/photos/{0}.jpg &&
+		primitive -i static/photos/{0}.jpg -o /tmp/{0}.gif -n 50 -m 8 &&
+		convert -delay 10x100 /tmp/{0}.gif \( +clone -set delay 500 \) +swap +delete /tmp/{0}.gif &&
+		mv /tmp/{0}.gif static/gifs/{0}.gif""".format(rand_string))
 
 	return rand_string
 
@@ -54,22 +57,6 @@ def mail():
 	s.login(config['mailgun_sandbox'], config['mailgun_key'])
 	s.sendmail(msg['From'], msg['To'], msg.as_string())
 	s.quit()
-	# mail_id = request.form['email']
-	# rand_string = request.form['hash']
-	# request_url = 'https://api.mailgun.net/v3/{0}/messages'.format(config['mailgun_sandbox'])
-	# r = requests.post(
-	# 	request_url,
-	# 	auth=('api', config['mailgun_key']),
-	# 	data={
-	# 		'from': 'postmaster@srishti.sdslabs.co',
-	# 		'to': mail_id,
-	# 		'subject': 'Hello from SDSLabs',
-	# 		'text': 'Hello from Mailgun'
-	# 	},
-	# 	files=[("attachment", open("static/gifs/{}.gif".format(rand_string), 'rb'))]
-	# )
-
-	# print(r.status_code, r.text)
 
 	return "Success!"
 
@@ -77,9 +64,9 @@ def mail():
 @app.route("/gifs", methods=['GET'])
 def show():
 	rand_string = request.args['hash']
-
 	return render_template("show.html", hash=rand_string)
 
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	context = ('cert.pem', 'key.pem')
+	app.run(host='0.0.0.0', ssl_context=context, threaded=True, debug=True)
