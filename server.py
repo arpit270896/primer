@@ -27,7 +27,7 @@ def get_image():
 	with open("static/photos/{}.jpg".format(rand_string), 'wb') as f:
 		f.write(b64decode(img_base64))
 
-	os.system("primitive -i static/photos/{0}.jpg -o /tmp/{0}.gif -n 100 -m 6 && mv /tmp/{0}.gif static/gifs/{0}.gif".format(rand_string))
+	os.system("convert static/photos/{0}.jpg -resize 256x256 static/photos/{0}.jpg && primitive -i static/photos/{0}.jpg -o /tmp/{0}.gif -n 350 -m 8 && convert -delay 10x100 /tmp/{0}.gif /tmp/{0}.gif && mv /tmp/{0}.gif static/gifs/{0}.gif".format(rand_string))
 
 	return rand_string
 

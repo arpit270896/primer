@@ -6,15 +6,20 @@ var video = document.querySelector('video');
 function snapshot() {        
 	if (localMediaStream) {
 		ctx.drawImage(video, 0, 0);
-		console.log($("#MainContainer > img").length);
-		if($("#MainContainer > img").length >= 10) {
-			console.log($("#MainContainer").find('img:first-child'));
-			$("#MainContainer img:first-child").remove();
+		console.log($("#MainContainer > div").length);
+		if($("#MainContainer > div").length >= 10) {
+			console.log($("#MainContainer").find('div:first-child'));
+			$("#MainContainer > div:first-child").remove();
 		}
+		var div = document.createElement('div');
+		var loaderDiv = document.createElement('div');
+		loaderDiv.className = "loader";
 		var img = document.createElement('img');
 		// "image/webp" works in Chrome 18. In other browsers, this will fall back to image/png.
 		img.src = canvas.toDataURL('image/jpg');
-		$("#MainContainer").prepend(img);
+		div.appendChild(img);
+		div.appendChild(loaderDiv);
+		$("#MainContainer").prepend(div);
 
 		data = {
 			'image_data': img.src
@@ -25,6 +30,7 @@ function snapshot() {
 			url: "/convert",
 			data: data,
 			success: function(resultData) {
+				div.removeChild(div.childNodes[1]);
 				img.src = "/static/gifs/" + resultData + ".gif";
 				$(img).on('click', function() {
 					window.open('/gifs?hash='+resultData, '_blank')
