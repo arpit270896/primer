@@ -39,7 +39,7 @@ def mail():
 		request_url,
 		auth=('api', config['mailgun_key']),
 		data={
-			'from': 'contact@sdslabs.co.in',
+			'from': 'postmaster@srishti.sdslabs.co',
 			'to': mail_id,
 			'subject': 'Hello from SDSLabs',
 			'text': 'Hello from Mailgun'

@@ -26,6 +26,9 @@ function snapshot() {
 			data: data,
 			success: function(resultData) {
 				img.src = "/static/gifs/" + resultData + ".gif";
+				$(img).on('click', function() {
+					window.open('/gifs?hash='+resultData, '_blank')
+				})
 			}
 		});
 	}

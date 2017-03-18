@@ -3,3 +3,4 @@ config.py
 *.swp
 venv/
 static/photos
+static/gifs
