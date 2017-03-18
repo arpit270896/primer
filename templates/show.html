@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<img src="/static/gifs/{{ hash }}.gif" style="height: 100%; width: 100%;"/>
+	<form action="#" id="mail-form">
+		<input type="email" name="email" id="email">
+		<input type="submit">
+	</form>
+</body>
+
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+<script type="text/javascript">
+	$('#mail-form').on('submit', function(e) {
+		e.preventDefault();
+		data = {
+			'hash': '{{ hash }}',
+			'email': $('#email')[0].value
+		};
+		$.ajax({
+			type: 'POST',
+			url: "/mail",
+			data: data,
+			success: function(resultData) {
+				console.log(resultData)
+			}
+		});
+	})
+</script>
+</html>
