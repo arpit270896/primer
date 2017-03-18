@@ -38,8 +38,8 @@ def mail():
 	rand_string = request.form['hash']
 
 	msg = MIMEMultipart()
-	msg.attach(MIMEText('Hello from Mailgun'))
-	msg['Subject'] = "Hello from SDSLabs"
+	msg.attach(MIMEText('Greetings from SDSLabs!\n Welcome to Srishti 2017. Thanks for checking out Primer-"Convex optimization based gif generator". We hope you have best expeience during Srishti at SDSLabs. \nYou will find your image and GIF generated attached here.\n\n Cheers!'))
+	msg['Subject'] = "Welcome to Srishti'17 at SDSLabs"
 	msg['From']    = "convop@srishti.sdslabs.co"
 	msg['To']      = mail_id
 
