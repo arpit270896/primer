@@ -1,0 +1,40 @@
+body {
+	display: flex;
+	justify-content: space-between;
+	overflow-y: hidden;
+}
+
+.video-stream {
+	width: 85%;
+	flex-grow: 0;
+	height: 100vh;
+}
+
+.video-stream div:first-child {
+	display: flex;
+}
+
+.video-stream input {
+	padding: 8px;
+	display: block;
+	margin: 10px auto;
+}
+
+.video-stream video {
+	margin: 0 auto;
+	max-width: 100%;
+	height: calc(100vh - 60px);
+}
+
+.image-gallery {
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+	flex-grow: 0;
+	height: 100vh;
+	overflow-x: scroll;
+}
+
+.image-gallery img {
+	width: 100%;
+}
