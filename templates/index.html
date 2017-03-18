@@ -3,8 +3,15 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<style type="text/css">
+		.pg-canvas{
+			    z-index: -24;
+    position: absolute;
+    background-color: #222222;
+		}
+	</style>
 </head>
-<body>
+<body id="body-back">
 	<div class="video-stream">
 		<div>
 			<video id="sourcevid" autoplay onloadedmetadata="ResizeCanvas();">
@@ -24,6 +31,14 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='jquery.ui.js') }}"></script>
+	<script type='text/javascript' src='../static/jquery.particleground.js'></script>
 <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+<script type="text/javascript">
+	$('#body-back').particleground({
+    dotColor: 'white',
+    lineColor: 'white',
+    density: 15000
+  });
+</script>
 </html>
 
