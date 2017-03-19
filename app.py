@@ -9,6 +9,9 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
+import time
+
+
 app = Flask(__name__)
 
 
@@ -28,7 +31,7 @@ def get_image():
 		f.write(b64decode(img_base64))
 
 	os.system("""convert static/photos/{0}.jpg -resize 256x256 static/photos/{0}.jpg &&
-		primitive -i static/photos/{0}.jpg -o /tmp/{0}.gif -n 50 -m 8 &&
+		primitive -i static/photos/{0}.jpg -o /tmp/{0}.gif -n 10 -m 8 &&
 		convert -delay 10x100 /tmp/{0}.gif \( +clone -set delay 500 \) +swap +delete /tmp/{0}.gif &&
 		mv /tmp/{0}.gif static/gifs/{0}.gif""".format(rand_string))
 

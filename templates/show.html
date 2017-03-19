@@ -10,7 +10,7 @@
 		<input type="email" name="email" id="email" placeholder="Email">
 		<input type="submit" value="Send">
 	</form>
-	<div id="mailed" style="display: none;">Mailed</div>
+	<div id="mailed"></div>
 </body>
 
 <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
@@ -32,9 +32,6 @@
 				$("#target :input").prop("disabled", false);
 				$("#mail-form :input").prop("disabled", false);
 				$('#mailed').html("Mailed!");
-				setTimeout(function() {
-					$('#mailed').hide();
-				}, 10000);
 				console.log(resultData);
 			}
 		});
