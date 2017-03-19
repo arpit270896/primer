@@ -7,9 +7,10 @@
 	<img src="/static/photos/{{ hash }}.jpg" style="height: 100%; width: 49%;"/>
 	<img src="/static/gifs/{{ hash }}.gif" style="height: 100%; width: 49%;"/>
 	<form action="#" id="mail-form">
-		<input type="email" name="email" id="email">
-		<input type="submit">
+		<input type="email" name="email" id="email" placeholder="Email">
+		<input type="submit" value="Send">
 	</form>
+	<div id="mailed" style="display: none;">Mailed</div>
 </body>
 
 <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
@@ -20,12 +21,21 @@
 			'hash': '{{ hash }}',
 			'email': $('#email')[0].value
 		};
+		$("#mail-form :input").prop("disabled", true);
+		$('#mailed').html("Mailing...");
+
 		$.ajax({
 			type: 'POST',
 			url: "/mail",
 			data: data,
 			success: function(resultData) {
-				console.log(resultData)
+				$("#target :input").prop("disabled", false);
+				$("#mail-form :input").prop("disabled", false);
+				$('#mailed').html("Mailed!");
+				setTimeout(function() {
+					$('#mailed').hide();
+				}, 10000);
+				console.log(resultData);
 			}
 		});
 	})

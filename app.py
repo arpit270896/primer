@@ -22,7 +22,7 @@ def get_image():
 	# img_base64 = request.data.get('image_data')
 	img_base64 = request.form['image_data'].split('data:image/png;base64,')[1]
 
-	rand_string = str(random.getrandbits(31)) + 'a'
+	rand_string = str(int(time.time())) + 'a'
 
 	with open("static/photos/{}.jpg".format(rand_string), 'wb') as f:
 		f.write(b64decode(img_base64))
@@ -65,6 +65,23 @@ def mail():
 def show():
 	rand_string = request.args['hash']
 	return render_template("show.html", hash=rand_string)
+
+@app.route("/gallery", methods=['GET'])
+def gallery():
+	photos = os.listdir('static/photos')
+	gifs = os.listdir('static/gifs')
+	photos.remove('.gitignore')
+	gifs.remove('.gitignore')
+
+	photos = [photo.split('.jpg')[0] for photo in photos]
+	gifs = [gif.split('.gif')[0] for gif in gifs]
+
+	photos = list(set(photos) - set(gifs))
+	photos.sort()
+	gifs.sort()
+	print(photos, gifs)
+	return render_template("gallery.html", photos=photos, gifs=gifs)
+
 
 
 if __name__ == "__main__":

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Webpage</title>
+</head>
+<body>
+    {% for gif in gifs %}
+        <a href="/gifs?hash={{ gif }}" target="_blank"><img width="24%" src="/static/gifs/{{ gif }}.gif" /></a>
+    {% endfor %}
+
+	<br>
+
+    {% for photo in photos %}
+        <img width="24%" src="/static/photos/{{ photo }}.jpg" />
+    {% endfor %}
+
+</body>
+</html>
