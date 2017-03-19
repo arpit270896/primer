@@ -8,8 +8,8 @@ function snapshot() {
 		ctx.drawImage(video, 0, 0);
 		console.log($("#MainContainer > div").length);
 		if($("#MainContainer > div").length >= 10) {
-			console.log($("#MainContainer").find('div:first-child'));
-			$("#MainContainer > div:first-child").remove();
+			console.log($("#MainContainer").find('div:last-child'));
+			$("#MainContainer > div:last-child").remove();
 		}
 		var div = document.createElement('div');
 		var loaderDiv = document.createElement('div');
